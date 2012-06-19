@@ -1,5 +1,7 @@
 (ns clojure-ttt.core
-  (:use clojure-ttt.game))
+  (:use clojure-ttt.game)
+  (:use clojure-ttt.board)
+  (:use clojure.set))
 
 (defn -main []
   (play-game)
