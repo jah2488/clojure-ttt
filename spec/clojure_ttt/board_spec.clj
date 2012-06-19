@@ -19,6 +19,11 @@
               (should (winner? "X" #{2 5 8}))
               (should (winner? "X" #{3 4 5}))))
 
+(describe "empty-cells"
+          (it "should return the count of nil (empty cells)"
+              (should= 9 (empty-cells (new-board)))
+              (should= 6 (empty-cells '("X" "O" "X" nil nil nil nil nil nil)))))
+
 (describe "print-cell"
           (it "should print the given cell"
               (should= " X " (with-out-str (print-cell '("X") 0))))

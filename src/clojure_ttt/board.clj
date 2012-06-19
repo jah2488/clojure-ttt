@@ -9,6 +9,9 @@
 (defn winner? [player board]
   (some (fn [cell] (subset? cell (player-moves player board))) winning-moves))
 
+(defn empty-cells [board]
+  (count (player-moves nil board)))
+
 (defn new-board []
   '(nil nil nil
     nil nil nil
