@@ -9,9 +9,16 @@
           (it "should recieve o and return x"
               (should= "X" (switch-player "O"))))
 
+(describe "stalemate?"
+          (it "should return true if there are no moves left"
+              (should     (stalemate? '("X"))))
+          (it "should return false if there are moves left"
+              (should-not (stalemate? (new-board)))))
+
 (describe "game-over?"
           (it "should return true if player has won"
               (should     (game-over? '("X" "X" "X" nil nil nil nil nil nil)))
           (it "should return false is nobody has won and there are moves left"
               (should-not (game-over? (new-board))))))
+
 (run-specs)

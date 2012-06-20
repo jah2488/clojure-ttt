@@ -10,41 +10,12 @@
   (some (fn [cell] (subset? cell (player-moves player board))) winning-moves))
 
 (defn empty-cells [board]
-  (count (player-moves nil board)))
+  (player-moves nil board))
 
 (defn new-board []
   '(nil nil nil
     nil nil nil
     nil nil nil))
-
-(defn print-cell [board index]
-  (if (= nil (nth board index))
-    (print (str (str " " index) " "))
-    (print (str (str " " (nth board index)) " "))))
-
-(defn print-board [board]
-  (do
-    (print-cell board 0)
-    (print "|")
-    (print-cell board 1)
-    (print "|")
-    (print-cell board 2)
-    (println "")
-    (println "---+---+---")
-    (print-cell board 3)
-    (print "|")
-    (print-cell board 4)
-    (print "|")
-    (print-cell board 5)
-    (println "")
-    (println "---+---+---")
-    (print-cell board 6)
-    (print "|")
-    (print-cell board 7)
-    (print "|")
-    (print-cell board 8)
-    (println "")
-    ))
 
 (defn update-board [board cell player]
   (concat

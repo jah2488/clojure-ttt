@@ -1,62 +1,49 @@
 (ns clojure-ttt.game
-  (:use clojure-ttt.board))
+  (:use clojure-ttt.board)
+  (:use clojure-ttt.display))
 
-(defn get-input []
+(defn get-input [limit]
   (print "-> ")
   (flush)
   (let [input (read-string (read-line))]
-    (println input)
-    (if (.contains (range 9) input)
+    (if (.contains limit input)
       input
-      (recur))))
+      (do
+        (println "\7")
+        (recur limit)))))
 
 
 (defn switch-player [current-player]
   (if (= "X" current-player) "O" "X"))
 
 (defn stalemate? [board]
-  (if (= 0 (empty-cells board)) true false))
+  (if (= 0 (count (empty-cells board))) true false))
 
 (defn game-over? [board]
   (some true?
-        [[#(winner? % board) '("X" "O")]
-         [(stalemate? board)]]))
+        [(or (winner? "X" board) (winner? "O" board))
+         (stalemate? board)]))
 
-
-(defn start []
-  (let [new-board (new-board)]
+(defn start [player]
+  (let [new-board (new-board)
+        player-move (fn [player board] (if (= player :computer) (print board) (get-input (empty-cells board))))]
   (loop [board new-board
          current-player "X"]
-    (println (format "%s Moves Remaining", (empty-cells board)))
-    (print-board board)
+    (print-game (format "M: %s   P: %s", (count (empty-cells board)) current-player) "Your Move" board)
     (if (game-over? board)
       (do
-        (println "GAME OVER")
         (if (stalemate? board)
-          (println "Stalemate!")
-          (println (format "Player %s Wins", (switch-player current-player)))))
+          (print-game "GAME OVER" "STALEMATE!" board)
+          (print-game "GAME OVER" (format "%s WINS!", (switch-player current-player)) board)))
       (do
-        (println (format "Its Your Turn %s", current-player))
         (recur
-          (update-board board (get-input) current-player)
+          (update-board board (player-move player board) current-player)
           (switch-player current-player)))))))
 
 (defn play-game []
-  (println "")
-  (println "+---------------+")
-  (println "|  Tic Tac Toe  |")
-  (println "+---------------+")
-  (println "|               |")
-  (println "|      (1)      |")
-  (println "|      (2)      |")
-  (println "|      (0)      |")
-  (println "|               |")
-  (println "+---------------+")
-  (println "")
+  (print-menu)
+  (case (get-input (range 3))
+    1 (start :computer)
+    2 (start :human)
+    0 (do (println "Goodbye!")(System/exit 0))))
 
-  (try (case (get-input)
-    1 (start )
-    2 (println "Multiplayer  game!")
-    Q (println "QUIT"))
-  (catch IllegalArgumentException e nil))
-  (recur))
