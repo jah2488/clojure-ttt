@@ -1,5 +1,4 @@
 (ns clojure-ttt.display
-  (:use clojure-ttt.board)
   (:use clojure.java.shell))
 
 (def blank  "\t|               |")
@@ -12,6 +11,13 @@
 (def magenta "35m")
 (def cyan    "36m")
 (def pink    "37m")
+
+(defn random-color [player]
+  (let [x-colors [green blue cyan]
+        o-colors [red yellow magenta]]
+    (if (= "X" player) (rand-nth x-colors) (rand-nth o-colors))))
+
+(def random-color (memoize random-color))
 
 (defn cstr [color message]
   (str "\033[" color message reset))
@@ -37,8 +43,8 @@
   (if (= nil (nth board index))
     (str " " (cstr pink index) " ")
     (if (= "X" (nth board index))
-      (cstr green (str " " (nth board index) " "))
-      (cstr red   (str " " (nth board index) " ")))))
+      (cstr (random-color "X") (str " " (nth board index) " "))
+      (cstr (random-color "O") (str " " (nth board index) " ")))))
 
 (defn get-row [board index]
   (str "  "
