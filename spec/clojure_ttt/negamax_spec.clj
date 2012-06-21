@@ -13,13 +13,16 @@
                                       "O" nil "X"
                                       nil nil "X") "X"))
               (should= 2 (best-move '(nil nil nil
-                                      "O" nil "X"
+                                      "O" "O" "X"
                                       nil "O" "X") "X"))
               (should= 2 (best-move '("X" "X" nil
-                                      nil nil "O"
+                                      nil "O" "O"
                                       nil nil "O") "X"))
-              (should= 1 (best-move '("X" nil "X"
+              (should= 4 (best-move '("X" "O" nil
                                       nil nil "O"
-                                      nil nil "O") "X"))))
+                                      nil nil "X") "X"))
+              (should= 6 (best-move '("X" "O" "X"
+                                      "O" "X" "O"
+                                      nil "X" "O") "X"))))
 
 (run-specs)

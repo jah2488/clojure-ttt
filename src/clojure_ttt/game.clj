@@ -14,6 +14,7 @@
         (println "\7")
         (recur limit)))))
 
+(defn end [] (println "Goodbye!") (System/exit 0))
 
 (defn start [player]
   (let [new-board (new-board)]
@@ -29,7 +30,7 @@
             (if (stalemate? board)
               (print-game "GAME OVER" "STALEMATE" board)
               (print-game "GAME OVER" (format "%s WINS!", (switch-player current-player)) board))
-            (System/exit 0))
+            (end))
             (recur
                 (update-board board (player-move player board) current-player)
                 (switch-player current-player)))))))
@@ -39,5 +40,5 @@
   (case (get-input (range 3))
     1 (start :computer)
     2 (start :human)
-    0 (do (println "Goodbye!")(System/exit 0))))
+    0 (end)))
 

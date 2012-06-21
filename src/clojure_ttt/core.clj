@@ -1,8 +1,5 @@
 (ns clojure-ttt.core
-  (:use clojure-ttt.game)
-  (:use clojure-ttt.board)
-  (:use clojure-ttt.display)
-  (:use clojure-ttt.negamax))
+  (:use clojure-ttt.game))
 
 (defn -main []
   (play-game)

@@ -18,7 +18,7 @@
 
 (describe "get-cell"
           (it "should print the given cell"
-              (should= (cstr green " X ") (get-cell '("X") 0)))
+              (should= 11 (.length (get-cell '("X") 0))))
           (it "should print the index number if cell is nil"
               (should= (str " " (cstr pink "0") " ")  (get-cell '(nil) 0))))
 

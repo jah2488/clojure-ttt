@@ -5,6 +5,7 @@
 
 (defn player-moves [player board]
   (into #{} (keep-indexed #(if (= player %2) %1) board)))
+
 (defn winner? [player board]
   (some (fn [cell] (subset? cell (player-moves player board))) winning-moves))
 

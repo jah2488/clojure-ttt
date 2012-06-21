@@ -83,4 +83,5 @@
   (println-center red   "(0)")
   (println blank)
   (println blank)
-  (println border))
+  (println border)
+  (print-message "Players"))
