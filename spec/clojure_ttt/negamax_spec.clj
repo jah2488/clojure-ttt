@@ -20,7 +20,7 @@
                                       nil nil "O") "X"))
               (should= 4 (best-move '("X" "O" nil
                                       nil nil "O"
-                                      nil nil "X") "X"))
+                                      nil "O" "X") "X"))
               (should= 6 (best-move '("X" "O" "X"
                                       "O" "X" "O"
                                       nil "X" "O") "X"))))
