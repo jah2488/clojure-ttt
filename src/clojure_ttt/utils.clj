@@ -12,3 +12,4 @@
         [(or (winner? "X" board) (winner? "O" board))
          (stalemate? board)]))
 
+(defn end [] (println "Goodbye!") (System/exit 0))

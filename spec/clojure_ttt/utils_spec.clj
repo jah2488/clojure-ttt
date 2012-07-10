@@ -21,4 +21,9 @@
           (it "should return false is nobody has won and there are moves left"
               (should-not (game-over? (new-board))))))
 
+(describe "end"
+          (context "Needs to stub SystemExit to be properly tested"
+          (it "prints goodbye")))
+
+
 (run-specs)

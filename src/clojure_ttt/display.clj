@@ -85,3 +85,9 @@
   (println blank)
   (println border)
   (print-message "Players"))
+
+(defn print-stalemate [board]
+  (print-game "GAME OVER" "STALEMATE" board))
+
+(defn print-winner [player board]
+  (print-game "GAME OVER" (format "%s WINS!", player) board))

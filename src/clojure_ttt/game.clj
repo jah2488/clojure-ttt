@@ -4,17 +4,17 @@
   (:use clojure-ttt.negamax)
   (:use clojure-ttt.utils))
 
+(defn prompt [] (print "-> "))
+
 (defn get-input [limit]
-  (print "-> ")
+  (prompt)
   (flush)
-  (let [input (read-string (read-line))]
+  (let [input (try (read-string (read-line)) (catch Exception e))]
     (if (.contains limit input)
       input
       (do
         (println "\7")
         (recur limit)))))
-
-(defn end [] (println "Goodbye!") (System/exit 0))
 
 (defn start [player]
   (let [new-board (new-board)]
@@ -28,8 +28,8 @@
         (if (game-over? board)
           (do
             (if (stalemate? board)
-              (print-game "GAME OVER" "STALEMATE" board)
-              (print-game "GAME OVER" (format "%s WINS!", (switch-player current-player)) board))
+              (print-stalemate board)
+              (print-winner current-player board))
             (end))
             (recur
                 (update-board board (player-move player board) current-player)
