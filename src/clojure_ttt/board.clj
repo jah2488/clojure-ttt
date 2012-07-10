@@ -13,9 +13,9 @@
   (player-moves nil board))
 
 (defn new-board []
-  '(nil nil nil
+  [nil nil nil
     nil nil nil
-    nil nil nil))
+    nil nil nil])
 
 (defn update-board [board cell player]
   (concat
