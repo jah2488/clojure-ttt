@@ -1,6 +1,6 @@
 (ns clojure-ttt.negamax
-  (:use clojure-ttt.board)
-  (:use clojure-ttt.utils))
+  (:use [clojure-ttt.board :only [winner? update-board empty-cells]] )
+  (:use [clojure-ttt.utils :only [switch-player]]))
 
 
 (declare rank-board)

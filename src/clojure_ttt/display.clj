@@ -55,7 +55,12 @@
     (get-cell board (+ index 2))
     "  "))
 
-(defn print-board [board]
+(defn print-message [message]
+  (println-center green message)
+  (println border))
+
+(defn print-board [header message board]
+  (print-header header)
   (println blank)
   (println-center reset (get-row board 0))
   (println-center reset "---+---+---")
@@ -63,16 +68,11 @@
   (println-center reset "---+---+---")
   (println-center reset (get-row board 6))
   (println blank)
-  (println border))
-
-(defn print-message [message]
-  (println-center green message)
-  (println border))
-
-(defn print-game [header message board]
-  (print-header  header)
-  (print-board   board)
+  (println border)
   (print-message message))
+
+(defn print-game [cell-count current-player board]
+  (print-board (format "M: %s   P: %s", cell-count current-player) "Your Move" board))
 
 (defn print-menu []
   (print-header "Tic Tac Toe")
@@ -87,7 +87,7 @@
   (print-message "Players"))
 
 (defn print-stalemate [board]
-  (print-game "GAME OVER" "STALEMATE" board))
+  (print-board "GAME OVER" "STALEMATE" board))
 
 (defn print-winner [player board]
-  (print-game "GAME OVER" (format "%s WINS!", player) board))
+  (print-board "GAME OVER" (format "%s WINS!", player) board))

@@ -1,8 +1,6 @@
 (ns clojure-ttt.game-spec
   (:use speclj.core)
-  (:use clojure-ttt.game)
-  (:use [clojure.test])
-  (:use [clojure.contrib.mock]))
+  (:use clojure-ttt.game))
 
 (describe "prompt"
           (it "prints the prompt text"

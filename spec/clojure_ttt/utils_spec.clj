@@ -22,8 +22,7 @@
               (should-not (game-over? (new-board))))))
 
 (describe "end"
-          (context "Needs to stub SystemExit to be properly tested"
-          (it "prints goodbye")))
-
+          (it "prints goodbye"
+             (should= "Goodbye!\n" (with-out-str (end)))))
 
 (run-specs)

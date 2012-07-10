@@ -16,24 +16,26 @@
         (println "\7")
         (recur limit)))))
 
+(defn player-move [player board current-player]
+  (if (and (= player :computer) (= current-player "O"))
+    (best-move board "O")
+    (get-input (empty-cells board))))
+
+(print-end-game [current-player board]
+  (if (stalemate? board)
+    (print-stalemate board)
+    (print-winner current-player board)))
+
 (defn start [player]
   (let [new-board (new-board)]
     (loop [board new-board
-          current-player "X"]
-      (let [player-move (fn [player board] (if (and (= player :computer) (= current-player "O"))
-                                             (best-move board "O")
-                                             (get-input (empty-cells board))))]
-        (print-game
-          (format "M: %s   P: %s", (count (empty-cells board)) current-player) "Your Move" board)
+           current-player "X"]
+        (print-game (count (empty-cells board)) current-player board)
         (if (game-over? board)
-          (do
-            (if (stalemate? board)
-              (print-stalemate board)
-              (print-winner current-player board))
-            (end))
+          (do (print-end-game current-player board) (end))
             (recur
-                (update-board board (player-move player board) current-player)
-                (switch-player current-player)))))))
+              (update-board board (player-move player board current-player) current-player)
+              (switch-player current-player))))))
 
 (defn play-game []
   (print-menu)

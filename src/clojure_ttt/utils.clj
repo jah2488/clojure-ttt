@@ -1,5 +1,5 @@
 (ns clojure-ttt.utils
-  (:use clojure-ttt.board))
+  (:use [clojure-ttt.board :only [empty-cells winner?]]))
 
 (defn switch-player [current-player]
   (if (= "X" current-player) "O" "X"))
@@ -12,4 +12,4 @@
         [(or (winner? "X" board) (winner? "O" board))
          (stalemate? board)]))
 
-(defn end [] (println "Goodbye!") (System/exit 0))
+(defn end [] (println "Goodbye!") (shutdown-agents))
