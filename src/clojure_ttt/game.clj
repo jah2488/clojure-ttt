@@ -21,26 +21,26 @@
     (best-move board "O")
     (get-input (empty-cells board))))
 
-(print-end-game [current-player board]
+(defn print-end-game [current-player board]
   (if (stalemate? board)
     (print-stalemate board)
     (print-winner current-player board)))
 
-(defn start [player]
-  (let [new-board (new-board)]
+(defn start [player new-board]
     (loop [board new-board
            current-player "X"]
         (print-game (count (empty-cells board)) current-player board)
         (if (game-over? board)
           (do (print-end-game current-player board) (end))
-            (recur
-              (update-board board (player-move player board current-player) current-player)
-              (switch-player current-player))))))
+          (recur
+            (update-board board (player-move player board current-player) current-player)
+            (switch-player current-player)))))
+
 
 (defn play-game []
   (print-menu)
   (case (get-input (range 3))
-    1 (start :computer)
-    2 (start :human)
+    1 (start :computer (new-board))
+    2 (start :human (new-board))
     0 (end)))
 
