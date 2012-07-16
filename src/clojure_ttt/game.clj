@@ -1,8 +1,8 @@
 (ns clojure-ttt.game
-  (:use clojure-ttt.board)
-  (:use clojure-ttt.display)
-  (:use clojure-ttt.negamax)
-  (:use clojure-ttt.utils))
+  (:use [clojure-ttt.board   :only [empty-cells new-board update-board]])
+  (:use [clojure-ttt.display :only [print-stalemate print-winner print-game print-menu]])
+  (:use [clojure-ttt.negamax :only [best-move]])
+  (:use [clojure-ttt.utils   :only [switch-player game-over? stalemate? end]]))
 
 (defn prompt [] (print "-> "))
 
@@ -41,6 +41,6 @@
   (print-menu)
   (case (get-input (range 3))
     1 (start :computer (new-board))
-    2 (start :human (new-board))
+    2 (start :human    (new-board))
     0 (end)))
 

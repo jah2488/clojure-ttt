@@ -32,13 +32,6 @@
 (defn println-center [color message]
   (println (str "\t|" (center color message) "|")))
 
-(defn print-header [message]
-  (println (:out (sh "clear")))
-  (println "")
-  (println border)
-  (println-center green message)
-  (println border))
-
 (defn get-cell [board index]
   (if (= nil (nth board index))
     (str " " (cstr pink index) " ")
@@ -54,6 +47,13 @@
     "|"
     (get-cell board (+ index 2))
     "  "))
+
+(defn print-header [message]
+  (println (:out (sh "clear")))
+  (println "")
+  (println border)
+  (println-center green message)
+  (println border))
 
 (defn print-message [message]
   (println-center green message)

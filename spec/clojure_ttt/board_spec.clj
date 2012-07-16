@@ -1,7 +1,6 @@
 (ns clojure-ttt.board-spec
   (:use speclj.core)
-  (:use clojure-ttt.board)
-  (:use clojure-ttt.display))
+  (:use clojure-ttt.board))
 
 (describe "new-board"
           (it " hold blank board"

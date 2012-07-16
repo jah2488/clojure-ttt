@@ -1,7 +1,7 @@
 (ns clojure-ttt.utils-spec
   (:use speclj.core)
   (:use clojure-ttt.utils)
-  (:use clojure-ttt.board))
+  (:use [clojure-ttt.board :only [new-board]]))
 
 (describe "switch-player"
           (it "should recieve x and return o"

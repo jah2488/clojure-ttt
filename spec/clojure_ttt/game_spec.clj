@@ -32,5 +32,6 @@
               (should= "GAME OVER" (re-find #"GAME OVER" (with-out-str (with-in-str "4" (start :human ["X" "X" "O"
                                                                                                        "O" nil "O"
                                                                                                        "X" "O" "X"])))))))
+
 (run-specs)
 

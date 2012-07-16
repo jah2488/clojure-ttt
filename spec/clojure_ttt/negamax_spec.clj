@@ -1,8 +1,6 @@
 (ns clojure-ttt.negamax-spec
   (:use speclj.core)
-  (:use clojure-ttt.negamax)
-  (:use clojure-ttt.board)
-  (:use clojure-ttt.utils))
+  (:use clojure-ttt.negamax))
 
 (describe 'best-move'
           (it "should return the best move for the computer"
