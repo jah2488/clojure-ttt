@@ -11,6 +11,10 @@ You'll need to have both leinighen and clojure to run the application. Luckily, 
 
 To run the game issue the command
 
+- Only need to run this once
+* lein deps
+
+
 * lein trampoline run
 
 Using simply lein run will cause the game to become unresponsive due to a quirk in how lein swallows stdin.
